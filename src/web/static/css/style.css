@@ -1,0 +1,139 @@
+/* src/umbrella_analysis/web/static/css/style.css */
+
+:root {
+    --bg-color: #1a1a1d;
+    --card-bg-color: #2b2d31;
+    --border-color: #444;
+    --text-color: #e0e0e0;
+    --text-color-secondary: #aaaaaa;
+    --primary-color: #e53935; /* Rojo Umbrella */
+    --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: var(--font-family);
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    line-height: 1.6;
+}
+
+header {
+    display: flex;
+    align-items: center;
+    padding: 1rem 2rem;
+    background-color: var(--card-bg-color);
+    border-bottom: 2px solid var(--primary-color);
+}
+
+.logo {
+    height: 40px;
+    width: auto;
+    margin-right: 1.5rem;
+    border-radius: 4px;
+    background-color: var(--primary-color);
+}
+
+header h1 {
+    font-size: 1.75rem;
+    font-weight: 600;
+}
+
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    padding: 2rem;
+    max-width: 1600px;
+    margin: 0 auto;
+}
+
+.card {
+    background-color: var(--card-bg-color);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.card h2 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-color-secondary);
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 0.5rem;
+}
+
+.metric-value {
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    display: block;
+    text-align: center;
+}
+
+/* Estilos para el gráfico de latencia */
+#card-alert-latency .metric-value {
+    color: #fdd835; /* Amarillo para alertas */
+}
+
+/* Contenedor de gráficos */
+.chart-container {
+    position: relative;
+    min-height: 350px;
+}
+
+/* Lista de errores */
+#error-list {
+    list-style: none;
+    font-size: 1.2rem;
+}
+
+#error-list li {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5rem 0;
+}
+
+#error-list li span {
+    font-weight: 700;
+    color: var(--primary-color);
+}
+
+.chart-container-large {
+    grid-column: 1 / -1;   /* Ocupa todo el ancho */
+    position: relative;    /* Obligatorio para que Chart.js sea responsivo */
+    height: 450px;       /* ¡Altura fija y explícita! */
+    width: 100%;
+}
+
+.card.chart-container-large {
+    display: block; /* Fuerza a que se comporte como un bloque normal */
+}
+
+/* NUEVO: Estilo para la lista de alertas */
+#alert-list {
+    list-style: none;
+    max-height: 300px;
+    overflow-y: auto;
+}
+#alert-list li {
+    padding: 0.5rem;
+    border-bottom: 1px solid var(--border-color);
+    color: #fdd835; /* Amarillo alerta */
+}
+#alert-list li:first-child {
+    font-weight: bold;
+    color: var(--primary-color); /* Rojo crítico */
+}
+
+#card-alerts {
+    grid-column: 1 / -1; /* Ocupa todo el ancho */
+}

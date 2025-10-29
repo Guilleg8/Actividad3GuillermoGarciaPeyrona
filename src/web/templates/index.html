@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Umbrella Dashboard</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <script src="/static/js/chart.min.js"></script>
+    <script src="/static/js/chartjs-adapter-date-fns.min.js"></script>
+</head>
+<body>
+    <header>
+        <img src="https://via.placeholder.com/150x50/DD0000/FFFFFF?text=UMBRELLA+CORP." alt="Logo Umbrella" class="logo">
+        <h1>Dashboard de Análisis Biológico en Tiempo Real</h1>
+    </header>
+
+    <main class="dashboard-grid">
+        <div class="card" id="card-total-processed">
+            <h2>Total Procesados</h2>
+            <span class="metric-value" id="metric-total-processed">0</span>
+        </div>
+        <div class="card" id="card-total-errors">
+            <h2>Total Errores</h2>
+            <span class="metric-value" id="metric-total-errors">0</span>
+        </div>
+        <div class="card" id="card-alert-latency">
+            <h2>Latencia Alertas (ms)</h2>
+            <span class="metric-value" id="metric-alert-latency">0.0</span>
+        </div>
+
+        <div class="card chart-container-large">
+            <h2>Latencia de Procesamiento (EKG)</h2>
+            <canvas id="realTimeLatencyChart"></canvas>
+        </div>
+
+        <div class="card" id="card-alerts">
+            <h2>Últimas Alertas</h2>
+            <ul id="alert-list">
+                </ul>
+        </div>
+    </main>
+
+    <script src="/static/js/dashboard.js"></script>
+</body>
+</html>
