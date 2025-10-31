@@ -1,0 +1,29 @@
+# === Dependencias Principales de la Aplicación ===
+
+# Para el servidor web asíncrono y WebSockets
+fastapi
+uvicorn[standard]
+
+# Para la validación y normalización de datos
+pydantic
+
+# Para servir las plantillas HTML
+jinja2
+
+# === Dependencias de Análisis (del documento original) ===
+#
+# Para futuro análisis y generación de reportes
+pandas
+matplotlib
+plotly
+
+# === Dependencias de Pruebas (Testing) ===
+
+# Framework principal de pruebas
+pytest
+
+# Para probar código asíncrono (asyncio)
+pytest-asyncio
+
+# Para simular (mock) objetos en las pruebas
+pytest-mock
