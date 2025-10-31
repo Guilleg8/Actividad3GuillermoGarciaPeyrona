@@ -47,19 +47,37 @@ El sistema sigue un patrón de Productor-Consumidor en varias etapas:
 
 El código fuente está contenido íntegramente en la carpeta `src/`.
 ```
-src/
-├── alerting/        # Gestiona el envío de alertas (AlertManager)
-├── communication/   # Define las colas (asyncio.Queue) que conectan los módulos
-├── ingestion/       # Simula la entrada de datos (Data Fetchers)
-├── monitoring/      # Colector de métricas Singleton (MetricsCollector)
-├── normalization/   # Clases de validación y limpieza de datos (Pydantic)
-├── processing/      # Lógica de concurrencia pesada (DataOrchestrator, Tareas CPU/IO)
-├── services/        # Lógica de negocio de primer nivel (GeneticoService, etc.)
-├── web/             # Servidor web FastAPI y frontend
-│   ├── static/      # Archivos CSS y JS (incluyendo Chart.js)
-│   └── templates/   # Archivo index.html
-├── config.py        # Archivo de configuración (ej. MAX_CPU_WORKERS)
-└── main.py          # Punto de entrada del backend (ensambla los servicios)
+umbrella_analysis_system/
+├── .venv/                   <-- Entorno virtual
+├── src/                     <-- Código fuente principal
+│   ├── alerting/            # Lógica de envío de alertas (AlertManager)
+│   ├── communication/       # Colas (Queues) de asyncio
+│   ├── ingestion/           # Simuladores de entrada de datos (Data Fetchers)
+│   ├── monitoring/          # Colector de métricas (MetricsCollector)
+│   ├── normalization/       # Validadores de datos (Normalizers)
+│   ├── processing/          # Motor de concurrencia (Orchestrator, Tareas CPU/IO)
+│   ├── services/            # Lógica de negocio (GeneticoService, etc.)
+│   └── web/                 # Servidor web y dashboard
+│       ├── static/
+│       │   ├── css/
+│       │   │   └── style.css
+│       │   └── js/
+│       │       ├── chart.min.js
+│       │       ├── chartjs-adapter-date-fns.min.js
+│       │       └── dashboard.js
+│       └── templates/
+│           └── index.html
+│
+├── tests/                   <-- Pruebas unitarias
+│   ├── test_monitoring.py
+│   ├── test_normalization.py
+│   ├── test_processing.py
+│   └── test_services.py
+│
+├── .gitignore
+├── README.md                <-- Documentación
+├── requirements.txt         <-- Dependencias del proyecto
+└── run.py                   <-- Punto de entrada principal para ejecutar
 ```
 ---
 
