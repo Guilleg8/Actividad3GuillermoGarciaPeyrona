@@ -47,7 +47,19 @@ El sistema sigue un patrón de Productor-Consumidor en varias etapas:
 
 El código fuente está contenido íntegramente en la carpeta `src/`.
 
-src/ ├── alerting/ # Gestiona el envío de alertas (AlertManager) ├── communication/ # Define las colas (asyncio.Queue) que conectan los módulos ├── ingestion/ # Simula la entrada de datos (Data Fetchers) ├── monitoring/ # Colector de métricas Singleton (MetricsCollector) ├── normalization/ # Clases de validación y limpieza de datos (Pydantic) ├── processing/ # Lógica de concurrencia pesada (DataOrchestrator, Tareas CPU/IO) ├── services/ # Lógica de negocio de primer nivel (GeneticoService, etc.) ├── web/ # Servidor web FastAPI y frontend │ ├── static/ # Archivos CSS y JS (incluyendo Chart.js) │ └── templates/ # Archivo index.html ├── config.py # Archivo de configuración (ej. MAX_CPU_WORKERS) └── main.py # Punto de entrada del backend (ensambla los servicios)
+src/
+├── alerting/        # Gestiona el envío de alertas (AlertManager)
+├── communication/   # Define las colas (asyncio.Queue) que conectan los módulos
+├── ingestion/       # Simula la entrada de datos (Data Fetchers)
+├── monitoring/      # Colector de métricas Singleton (MetricsCollector)
+├── normalization/   # Clases de validación y limpieza de datos (Pydantic)
+├── processing/      # Lógica de concurrencia pesada (DataOrchestrator, Tareas CPU/IO)
+├── services/        # Lógica de negocio de primer nivel (GeneticoService, etc.)
+├── web/             # Servidor web FastAPI y frontend
+│   ├── static/      # Archivos CSS y JS (incluyendo Chart.js)
+│   └── templates/   # Archivo index.html
+├── config.py        # Archivo de configuración (ej. MAX_CPU_WORKERS)
+└── main.py          # Punto de entrada del backend (ensambla los servicios)
 
 
 ---
