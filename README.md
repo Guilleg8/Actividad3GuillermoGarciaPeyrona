@@ -46,7 +46,7 @@ El sistema sigue un patrón de Productor-Consumidor en varias etapas:
 ## 3. Estructura del Proyecto
 
 El código fuente está contenido íntegramente en la carpeta `src/`.
-
+```
 src/
 ├── alerting/        # Gestiona el envío de alertas (AlertManager)
 ├── communication/   # Define las colas (asyncio.Queue) que conectan los módulos
@@ -60,8 +60,7 @@ src/
 │   └── templates/   # Archivo index.html
 ├── config.py        # Archivo de configuración (ej. MAX_CPU_WORKERS)
 └── main.py          # Punto de entrada del backend (ensambla los servicios)
-
-
+```
 ---
 
 ## 4. Instalación
