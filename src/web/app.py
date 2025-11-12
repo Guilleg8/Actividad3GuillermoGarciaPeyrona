@@ -1,4 +1,3 @@
-# src/web/app.py
 
 import asyncio
 from fastapi import FastAPI, Request, WebSocket, WebSocketDisconnect
@@ -7,20 +6,14 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from pathlib import Path
 
-# --- Arreglo de Importación ---
-# (Asegúrate de que estas importaciones NO tengan '..' o 'umbrella_analysis')
 from monitoring import MetricsCollector
 from .connection_manager import manager, websocket_broadcaster
 
-# ---------------------------
 
-# --- Arreglo del Primer Error ---
-# (Esto corrige el 'FastAPI(...)')
 app = FastAPI(
     title="Umbrella Analysis Dashboard",
     description="Monitorización en tiempo real del sistema de análisis."
 )
-# ------------------------------
 
 base_dir = Path(__file__).resolve().parent
 static_dir = base_dir / "static"
@@ -59,16 +52,13 @@ async def websocket_endpoint(websocket: WebSocket):
         manager.disconnect(websocket)
 
 
-# --- Arreglo del Segundo Error ---
-# (Esto corrige el 'Config(...)')
+
 async def run_web_server():
-    """
-    Inicia el servidor web Uvicorn de forma programática.
-    """
+
     import uvicorn
 
     config = uvicorn.Config(
-        app,  # <--- Ya no es '...'
+        app,
         host="0.0.0.0",
         port=8000,
         log_level="info"
@@ -77,4 +67,3 @@ async def run_web_server():
 
     print("[Web Server] Iniciado en http://0.0.0.0:8000")
     await server.serve()
-# ---------------------------------

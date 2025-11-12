@@ -1,4 +1,3 @@
-/* src/umbrella_analysis/web/static/css/style.css */
 
 :root {
     --bg-color: #1a1a1d;
@@ -79,18 +78,15 @@ header h1 {
     text-align: center;
 }
 
-/* Estilos para el gráfico de latencia */
 #card-alert-latency .metric-value {
-    color: #fdd835; /* Amarillo para alertas */
+    color: #fdd835;
 }
 
-/* Contenedor de gráficos */
 .chart-container {
     position: relative;
     min-height: 350px;
 }
 
-/* Lista de errores */
 #error-list {
     list-style: none;
     font-size: 1.2rem;
@@ -108,17 +104,16 @@ header h1 {
 }
 
 .chart-container-large {
-    grid-column: 1 / -1;   /* Ocupa todo el ancho */
-    position: relative;    /* Obligatorio para que Chart.js sea responsivo */
-    height: 450px;       /* ¡Altura fija y explícita! */
+    grid-column: 1 / -1;
+    position: relative;
+    height: 450px;
     width: 100%;
 }
 
 .card.chart-container-large {
-    display: block; /* Fuerza a que se comporte como un bloque normal */
+    display: block;
 }
 
-/* NUEVO: Estilo para la lista de alertas */
 #alert-list {
     list-style: none;
     max-height: 300px;
@@ -127,13 +122,13 @@ header h1 {
 #alert-list li {
     padding: 0.5rem;
     border-bottom: 1px solid var(--border-color);
-    color: #fdd835; /* Amarillo alerta */
+    color: #fdd835;
 }
 #alert-list li:first-child {
     font-weight: bold;
-    color: var(--primary-color); /* Rojo crítico */
+    color: var(--primary-color);
 }
 
 #card-alerts {
-    grid-column: 1 / -1; /* Ocupa todo el ancho */
+    grid-column: 1 / -1;
 }
