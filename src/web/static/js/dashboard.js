@@ -1,27 +1,23 @@
-// src/umbrella_analysis/web/static/js/dashboard.js
 
 document.addEventListener("DOMContentLoaded", () => {
 
-    // --- Referencias a elementos del DOM ---
     const metricTotalProcessed = document.getElementById("metric-total-processed");
     const metricTotalErrors = document.getElementById("metric-total-errors");
     const metricAlertLatency = document.getElementById("metric-alert-latency");
     const alertList = document.getElementById("alert-list");
 
-    // --- Configuración del Gráfico de Línea ---
-    const MAX_DATA_POINTS = 50; // ¿Cuántos puntos mostrar antes de que se "deslice"?
+    const MAX_DATA_POINTS = 50;
 
     const lineCtx = document.getElementById('realTimeLatencyChart').getContext('2d');
     const realTimeLatencyChart = new Chart(lineCtx, {
         type: 'line',
         data: {
-            // Los 'labels' serán las marcas de tiempo
             labels: [],
             datasets: [
                 {
                     label: 'Genetic',
                     data: [],
-                    borderColor: '#e53935', // Rojo
+                    borderColor: '#e53935',
                     backgroundColor: 'rgba(229, 57, 53, 0.1)',
                     borderWidth: 2,
                     tension: 0.3,
@@ -31,7 +27,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 {
                     label: 'Biochemical',
                     data: [],
-                    borderColor: '#1e88e5', // Azul
+                    borderColor: '#1e88e5',
                     backgroundColor: 'rgba(30, 136, 229, 0.1)',
                     borderWidth: 2,
                     tension: 0.3,
@@ -41,7 +37,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 {
                     label: 'Physical',
                     data: [],
-                    borderColor: '#43a047', // Verde
+                    borderColor: '#43a047',
                     backgroundColor: 'rgba(67, 160, 71, 0.1)',
                     borderWidth: 2,
                     tension: 0.3,
@@ -61,7 +57,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     grid: { color: '#444' }
                 },
                 x: {
-                    type: 'time', // Usamos una escala de tiempo
+                    type: 'time',
                     time: { unit: 'second', displayFormats: { second: 'HH:mm:ss' } },
                     ticks: { color: '#e0e0e0' },
                     grid: { display: false }
@@ -73,56 +69,45 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    /**
-     * Añade datos al gráfico de línea de forma deslizante.
-     */
+
     function addDataToChart(label, value) {
         const now = new Date();
 
-        // Añade la marca de tiempo a los labels
         realTimeLatencyChart.data.labels.push(now);
 
-        // Añade el dato al dataset correcto (y 'null' a los otros)
         realTimeLatencyChart.data.datasets.forEach(dataset => {
             if (dataset.label.toLowerCase() === label.toLowerCase()) {
                 dataset.data.push(value);
             } else {
-                dataset.data.push(null); // 'null' crea un hueco en el gráfico
+                dataset.data.push(null);
             }
         });
 
-        // Elimina datos viejos si se supera el límite
         if (realTimeLatencyChart.data.labels.length > MAX_DATA_POINTS) {
-            realTimeLatencyChart.data.labels.shift(); // Quita el label más viejo
+            realTimeLatencyChart.data.labels.shift();
             realTimeLatencyChart.data.datasets.forEach(dataset => {
-                dataset.data.shift(); // Quita el dato más viejo
+                dataset.data.shift();
             });
         }
 
-        realTimeLatencyChart.update('none'); // 'none' para una actualización sin animación
+        realTimeLatencyChart.update('none');
     }
 
-    /**
-     * Añade una alerta a la lista de alertas.
-     */
+
     function addAlertToList(message, level) {
         const li = document.createElement("li");
         li.className = `alert-level-${level.toLowerCase()}`;
         li.textContent = `[${new Date().toLocaleTimeString()}] ${message}`;
-        // Añade al principio de la lista
         alertList.prepend(li);
-        // Limita la lista
         while (alertList.children.length > 10) {
             alertList.removeChild(alertList.lastChild);
         }
     }
 
-    // --- Conexión WebSocket ---
 
     function connectWebSocket() {
-        // Asegura que la URL es correcta (ws:// en lugar de http://)
         const wsProtocol = window.location.protocol === "https:" ? "wss:" : "ws:";
-        const wsUrl = `${wsProtocol}//${window.location.host}/ws`;
+        const wsUrl = `${wsProtocol};
 
         console.log("Conectando a WebSocket en:", wsUrl);
         const ws = new WebSocket(wsUrl);
@@ -130,7 +115,7 @@ document.addEventListener("DOMContentLoaded", () => {
         ws.onopen = () => console.log("WebSocket conectado.");
         ws.onclose = () => {
             console.log("WebSocket desconectado. Intentando reconectar en 3s...");
-            setTimeout(connectWebSocket, 3000); // Intenta reconectar
+            setTimeout(connectWebSocket, 3000);
         };
         ws.onerror = (error) => console.error("Error de WebSocket:", error);
 
@@ -138,7 +123,6 @@ document.addEventListener("DOMContentLoaded", () => {
             try {
                 const data = JSON.parse(event.data);
                 console.log("Mensaje WebSocket Recibido:", data);
-                // Enruta el evento recibido
                 switch(data.type) {
                     case "latency":
                         addDataToChart(data.label, data.value);
@@ -153,7 +137,6 @@ document.addEventListener("DOMContentLoaded", () => {
         };
     }
 
-    // --- Conexión Fetch (para los totales) ---
 
     async function updateAggregateMetrics() {
         try {
@@ -161,7 +144,6 @@ document.addEventListener("DOMContentLoaded", () => {
             if (!response.ok) return;
             const stats = await response.json();
 
-            // Actualiza las tarjetas (cards)
             metricTotalProcessed.textContent = stats.events_processed.total;
             metricTotalErrors.textContent = stats.errors_count.total;
             metricAlertLatency.textContent = stats.average_alert_latency_ms.toFixed(2);
@@ -171,10 +153,8 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    // --- Inicio ---
-    connectWebSocket(); // Inicia la conexión en vivo
+    connectWebSocket();
 
-    // Sigue pidiendo los totales (agregados) cada 2 segundos
     updateAggregateMetrics();
     setInterval(updateAggregateMetrics, 2000);
 });

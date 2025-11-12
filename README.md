@@ -68,12 +68,6 @@ umbrella_analysis_system/
 │       └── templates/
 │           └── index.html
 │
-├── tests/                   <-- Pruebas unitarias
-│   ├── test_monitoring.py
-│   ├── test_normalization.py
-│   ├── test_processing.py
-│   └── test_services.py
-│
 ├── .gitignore
 ├── README.md                <-- Documentación
 ├── requirements.txt         <-- Dependencias del proyecto

@@ -1,4 +1,3 @@
-# src/umbrella_analysis/alerting/__init__.py
 
 """
 Módulo de Alertas
